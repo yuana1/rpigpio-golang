@@ -1,12 +1,12 @@
-package wiringPi
+package rpigpio_golang
 
 /*
-#cgo CFLAGS: -I./include
-#cgo LDFLAGS: -L./lib -lwiringPi
+#cgo CFLAGS: -I./wiringPi/include
+#cgo LDFLAGS: -L./wiringPi/lib -lwiringPi
 #include <stdlib.h>
 #include <wiringPi.h>
 #include <wiringSerial.h>
-extern void ISRCallback()
+extern void ISRCallback();
 static inline int wiringPiISR1 (int pin, int mode) {
 	return wiringPiISR(pin, mode, ISRCallback);
 }
@@ -15,6 +15,7 @@ import "C"
 import (
 	_ "unsafe"
 	"unsafe"
+	"log"
 )
 
 //export ISRCallback
