@@ -6,9 +6,8 @@ package wiringPi
 #include <stdlib.h>
 #include <wiringPi.h>
 #include <wiringSerial.h>
-void ISRCallback() {
-}
-int wiringPiISR1 (int pin, int mode) {
+extern void ISRCallback()
+static inline int wiringPiISR1 (int pin, int mode) {
 	return wiringPiISR(pin, mode, ISRCallback);
 }
  */
@@ -18,7 +17,22 @@ import (
 	"unsafe"
 )
 
+//export ISRCallback
 func ISRCallback() {
+	callBackFunction()
+}
+
+var callBackFunction = func() {
+
+}
+func Register(fn func()) {
+	callBackFunction = fn
+}
+
+func Unregister(name string) {
+	callBackFunction = func() {
+		log.Println("default isr")
+	}
 }
 
 // set up
